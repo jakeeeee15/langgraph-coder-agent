@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nova AI — Premium Autonomous Assistant</title>
+<meta name="description" content="Nova AI is a premium autonomous assistant that plans, executes, and verifies complex work across your tools with privacy-first controls and human-in-the-loop approvals.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nova AI">
+<meta property="og:title" content="Nova AI — Premium Autonomous Assistant">
+<meta property="og:description" content="Plan, execute, and verify complex work across your tools with a premium autonomous AI assistant.">
+<meta property="og:url" content="https://nova.ai">
+<meta property="og:image" content="https://nova.ai/og-cover.png">
+<meta property="og:image:alt" content="Nova AI autonomous assistant landing page preview">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nova AI — Premium Autonomous Assistant">
+<meta name="twitter:description" content="Plan, execute, and verify complex work across your tools with a premium autonomous AI assistant.">
+<meta name="twitter:image" content="https://nova.ai/og-cover.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='14' fill='url(%23g)'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<script src="script.js" defer></script>
+<style>
+:root {
+  --bg: #f7f8fc;
+  --surface: #ffffff;
+  --surface-2: #f1f3f9;
+  --text: #0f172a;
+  --muted: #5b6475;
+  --border: #dfe3ec;
+  --primary: #7c3aed;
+  --accent: #06b6d4;
+  --primary-soft: rgba(124, 58, 237, 0.12);
+  --focus: rgba(124, 58, 237, 0.35);
+  --header-bg: rgba(255, 255, 255, 0.76);
+  --code-bg: #0b1020;
+  --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg: #070a13;
+  --surface: #0f1420;
+  --surface-2: #121826;
+  --text: #e5e7eb;
+  --muted: #9aa4b2;
+  --border: #263043;
+  --primary: #a78bfa;
+  --accent: #22d3ee;
+  --primary-soft: rgba(167, 139, 250, 0.16);
+  --focus: rgba(167, 139, 250, 0.45);
+  --header-bg: rgba(7, 10, 19, 0.72);
+  --code-bg: #05070d;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -48px;
+  z-index: 1000;
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 900;
+  background: var(--header-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(124, 58, 237, 0.24);
+}
+
+.brand-mark svg {
+  width: 20px;
+  height: 20px;
+}
+
+.primary-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 650;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.nav-list a:hover,
+.nav-list a:focus-visible {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.nav-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  place-items: center;
+}
+
+.nav-toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+.theme-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.theme-icon-dark {
+  display: none;
+}
+
+[data-theme="dark"] .theme-icon-light {
+  display: none;
+}
+
+[data-theme="dark"] .theme-icon-dark {
+  display: block;
+}
+
+main {
+  padding-top: 72px;
+}
+
+section {
+  padding: 86px 0;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.section-header {
+  max-width: 760px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.section-header h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  margin-top: 14px;
+}
+
+.section-subtitle {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: calc(100vh - 72px);
+  display: flex;
+  align-items: center;
+  padding: 120px 0 90px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(
+    120deg,
+    rgba(124, 58, 237, 0.32),
+    rgba(6, 182, 212, 0.22),
+    rgba(236, 72, 153, 0.18),
+    rgba(124, 58, 237, 0.28)
+  );
+  background-size: 300% 300%;
+  animation: gradientMove 18s ease-in-out infinite;
+  filter: blur(42px);
+  opacity: 0.85;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 44px;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero-copy h1 {
+  font-size: clamp(2.6rem, 6vw, 4.8rem);
+  margin-top: 18px;
+}
+
+.subheadline {
+  margin-top: 18px;
+  max-width: 640px;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 22px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.primary-cta {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  box-shadow: 0 14px 34px rgba(124, 58, 237, 0.28);
+}
+
+.secondary-cta {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.hero-points {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.hero-points li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-visual {
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+}
+
+.ai-orb {
+  width: min(360px, 100%);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  animation: float 6s ease-in-out infinite;
+}
+
+.ai-orb svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 20px 45px rgba(124, 58, 237, 0.35));
+}
+
+.terminal-demo {
+  width: 100%;
+  max-width: 520px;
+  background: rgba(10, 12, 18, 0.86);
+  color: #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+
+.terminal-dot:nth-child(2) {
+  background: #febc2e;
+}
+
+.terminal-dot:nth-child(3) {
+  background: #28c840;
+}
+
+.terminal-title {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.terminal-body {
+  padding: 16px;
+  min-height: 170px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.terminal-line {
+  margin: 0;
+}
+
+.terminal-line.prompt {
+  color: #a5b4fc;
+}
+
+.terminal-line.response {
+  color: #d1fae5;
+}
+
+.terminal-form {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.terminal-input {
+  flex: 1;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-radius: 10px;
+  padding: 11px 12px;
+  font: inherit;
+}
+
+.terminal-submit {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.marquee-section {
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.marquee {
+  position: relative;
+  overflow: hidden;
+}
+
+.marquee::before,
+.marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee::before {
+  left: 0;
+  background: linear-gradient(to right, var(--surface), transparent);
+}
+
+.marquee::after {
+  right: 0;
+  background: linear-gradient(to left, var(--surface), transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-list {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  list-style: none;
+  margin: 0;
+  padding: 0 17px;
+}
+
+.marquee-item {
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.capabilities {
+  background: var(--bg);
+}
+
+.capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.capability-card {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.capability-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+  box-shadow: 0 24px 70px rgba(124, 58, 237, 0.14);
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.card-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.capability-card h3 {
+  font-size: 1.22rem;
+  margin-bottom: 10px;
+}
+
+.capability-card p {
+  color: var(--muted);
+}
+
+.workflow {
+  background: var(--surface-2);
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary), var(--accent));
+}
+
+.workflow-step {
+  position: relative;
+  padding-left: 64px;
+}
+
+.step-number {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  font-weight: 850;
+  box-shadow: 0 12px 28px rgba(124, 58, 237, 0.22);
+}
+
+.workflow-step h3 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.workflow-step p {
+  color: var(--muted);
+}
+
+.interactive-demo {
+  background: var(--bg);
+}
+
+.demo-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 18px;
+}
+
+.demo-controls {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.demo-btn {
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 750;
+  cursor: pointer;
+  text-align: left;
+}
+
+.demo-btn[aria-pressed="true"] {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.demo-output {
+  background: var(--code-bg);
+  color: #e5e7eb;
+  border-radius: 20px;
+  padding: 20px;
+  min-height: 280px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  overflow: auto;
+  box-shadow: var(--shadow);
+}
+
+.demo-log-line {
+  margin: 0 0 8px;
+}
+
+.metrics {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(6, 182, 212, 0.12));
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0;
+}
+
+.stat {
+  padding: 24px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.stat dt {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.stat dd {
+  margin: 8px 0 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+}
+
+.proof {
+  background: var(--bg);
+}
+
+.carousel {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.45s cubic-bezier(0.22, 0.8, 0.28, 1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  padding: 34px;
+}
+
+blockquote {
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  line-height: 1.55;
+}
+
+.carousel-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  font-weight: 850;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+  font-weight: 850;
+}
+
+.carousel-control.prev {
+  left: -22px;
+}
+
+.carousel-control.next {
+  right: -22px;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--border);
+  cursor: pointer;
+  padding: 0;
+}
+
+.indicator[aria-current="true"] {
+  background: var(--primary);
+  width: 26px;
+  border-radius: 999px;
+}
+
+.pricing {
+  background: var(--surface-2);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.pricing-card {
+  position: relative;
+  padding: 28px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.pricing-card.featured {
+  border-color: var(--primary);
+  box-shadow: 0 24px 70px rgba(124, 58, 237, 0.18);
+  transform: scale(1.02);
+}
+
+.badge {
+  position: absolute;
+  top: -12px;
+  right: 18px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.pricing-card h3 {
+  font-size: 1.35rem;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 14px 0;
+}
+
+.price-value {
+  font-size: 2.8rem;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+}
+
+.price-period {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.feature-list {
+  list-style: none;
+  margin: 18px 0 24px;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  color: var(--muted);
+}
+
+.feature-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.feature-list svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  color: var(--primary);
+}
+
+.pricing-card .btn {
+  width: 100%;
+}
+
+.faq {
+  background: var(--bg);
+}
+
+.faq-list {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.faq-item summary {
+  list-style: none;
+  padding: 18px;
+  cursor: pointer;
+  font-weight: 800;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  font-size: 1.4rem;
+  color: var(--primary);
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 18px 18px;
+  color: var(--muted);
+}
+
+.contact {
+  background: var(--surface-2);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 24px;
+}
+
+.contact-aside h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.contact-aside p {
+  margin-top: 14px;
+  color: var(--muted);
+}
+
+.contact-form {
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+label {
+  font-weight: 800;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-status {
+  min-height: 24px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  padding: 34px 0;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-links {
+  display: flex;
+  gap: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+input:focus,
+textarea:focus,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 980px) {
+  .hero-inner,
+  .demo-layout,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .capabilities-grid,
+  .pricing-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .nav-toggle {
+    display: grid;
+  }
+
+  .nav-list {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    display: none;
+    flex-direction: column;
+    min-width: 220px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+
+  .primary-nav.nav-open .nav-list {
+    display: flex;
+  }
+
+  .theme-toggle-label {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  section {
+    padding: 64px 0;
+  }
+
+  .hero {
+    padding-top: 110px;
+  }
+
+  .capabilities-grid,
+  .pricing-grid,
+  .stats-grid,
+  .hero-points,
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .carousel-control {
+    top: auto;
+    bottom: 12px;
+    transform: none;
+  }
+
+  .carousel-control.prev {
+    left: 12px;
+  }
+
+  .carousel-control.next {
+    right: 12px;
+  }
+
+  .pricing-card.featured {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero-bg,
+  .ai-orb,
+  .marquee-track {
+    animation: none;
+  }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header id="site-header" class="site-header fixed-header" role="banner" aria-label="Main site header">
+  <div class="container header-inner">
+    <a class="brand" href="#home" aria-label="Nova AI home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v4"></path>
+          <path d="M12 18v4"></path>
+          <path d="M4.93 4.93l2.83 2.83"></path>
+          <path d="M16.24 16.24l2.83 2.83"></path>
+          <path d="M2 12h4"></path>
+          <path d="M18 12h4"></path>
+        </svg>
+      </span>
+      <span class="brand-name">Nova AI</span>
+    </a>
+
+    <nav class="primary-nav" role="navigation" aria-label="Primary navigation">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Toggle navigation menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+      </button>
+
+      <ul id="primary-menu" class="nav-list">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#capabilities">Capabilities</a></li>
+        <li><a href="#workflow">Workflow</a></li>
+        <li><a href="#proof">Proof</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <button class="theme-toggle" type="button" aria-label="Toggle color theme" aria-pressed="false" data-theme-toggle>
+      <svg class="theme-icon theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2"></path>
+        <path d="M12 20v2"></path>
+        <path d="M4.93 4.93l1.41 1.41"></path>
+        <path d="M17.66 17.66l1.41 1.41"></path>
+        <path d="M2 12h2"></path>
+        <path d="M20 12h2"></path>
+        <path d="M4.93 19.07l1.41-1.41"></path>
+        <path d="M17.66 6.34l1.41-1.41"></path>
+      </svg>
+      <svg class="theme-icon theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+      <span class="theme-toggle-label">Light</span>
+    </button>
+  </div>
+</header>
+
+<main id="main-content" role="main">
+  <section id="home" class="hero" aria-labelledby="hero-title">
+    <div class="hero-bg animated-gradient" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Autonomous AI agent</p>
+        <h1 id="hero-title">Your premium autonomous assistant</h1>
+        <p class="subheadline">
+          Nova plans, executes, and verifies complex work across your tools — with privacy-first controls,
+          human approvals, and measurable outcomes.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary-cta" href="#contact">Start free trial</a>
+          <a class="btn secondary-cta" href="#capabilities">Explore capabilities</a>
+        </div>
+
+        <ul class="hero-points">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M20 6L9 17l-5-5"></path>
+            </svg>
+            SOC 2 ready
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M20 6L9 17l-5-5"></path>
+            </svg>
+            Human-in-the-loop
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M20 6L9 17l-5-5"></path>
+            </svg>
+            18+ integrations
+          </li>
+        </ul>
+      </div>
+
+      <div class="hero-visual">
+        <div class="ai-orb" role="img" aria-label="Floating AI assistant orb">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <defs>
+              <radialGradient id="orbGrad" cx="35%" cy="35%" r="75%">
+                <stop offset="0%" stop-color="#ffffff"></stop>
+                <stop offset="35%" stop-color="#a78bfa"></stop>
+                <stop offset="100%" stop-color="#06b6d4"></stop>
+              </radialGradient>
+              <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#7c3aed"></stop>
+                <stop offset="100%" stop-color="#06b6d4"></stop>
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="100" r="72" fill="url(#orbGrad)"></circle>
+            <circle cx="100" cy="100" r="86" fill="none" stroke="url(#ringGrad)" stroke-width="4" stroke-dasharray="12 10"></circle>
+            <circle cx="72" cy="78" r="10" fill="#ffffff" opacity="0.9"></circle>
+            <circle cx="100" cy="100" r="26" fill="rgba(255,255,255,0.22)"></circle>
+          </svg>
+        </div>
+
+        <div class="terminal-demo" role="region" aria-label="Interactive terminal demo">
+          <div class="terminal-header" aria-hidden="true">
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+            <span class="terminal-title">agent://nova</span>
+          </div>
+
+          <div class="terminal-body" id="terminal-output" role="log" aria-live="polite">
+            <p class="terminal-line prompt">&gt; nova --status</p>
+            <p class="terminal-line response">Connected to 12 workspaces</p>
+            <p class="terminal-line response">Ready to plan, execute, and verify tasks.</p>
+          </div>
+
+          <form class="terminal-form" data-terminal-form>
+            <label class="sr-only" for="terminal-input">Ask the AI agent a question</label>
+            <input id="terminal-input" class="terminal-input" type="text" name="prompt" placeholder="Ask Nova: summarize my inbox" autocomplete="off">
+            <button class="terminal-submit" type="submit" aria-label="Send prompt to AI agent">Run</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="marquee-section" aria-labelledby="trusted-title">
+    <div class="container">
+      <h2 id="trusted-title" class="sr-only">Trusted by teams</h2>
+      <div class="marquee" role="region" aria-label="Trusted by logos marquee">
+        <div class="marquee-track">
+          <ul class="marquee-list">
+            <li class="marquee-item">Northwind</li>
+            <li class="marquee-item">Lumen</li>
+            <li class="marquee-item">Vertex</li>
+            <li class="marquee-item">Atlas</li>
+            <li class="marquee-item">Nimbus</li>
+            <li class="marquee-item">Quanta</li>
+          </ul>
+          <ul class="marquee-list" aria-hidden="true">
+            <li class="marquee-item">Northwind</li>
+            <li class="marquee-item">Lumen</li>
+            <li class="marquee-item">Vertex</li>
+            <li class="marquee-item">Atlas</li>
+            <li class="marquee-item">Nimbus</li>
+            <li class="marquee-item">Quanta</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="capabilities" class="capabilities" aria-labelledby="capabilities-title">
+    <div class="container">
+      <header class="section-header">
+        <p class="eyebrow">Capabilities</p>
+        <h2 id="capabilities-title">What Nova can do</h2>
+        <p class="section-subtitle">
+          A premium agent stack designed for autonomous execution, grounded reasoning, and safe escalation.
+        </p>
+      </header>
+
+      <div class="capabilities-grid">
+        <article class="capability-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+          </div>
+          <h3>Autonomous planning</h3>
+          <p>Breaks goals into steps, chooses tools, and adapts when context changes.</p>
+        </article>
+
+        <article class="capability-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2h6v6"></path>
+              <path d="M10 14L2 22"></path>
+              <path d="M18 13v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h7"></path>
+            </svg>
+          </div>
+          <h3>Tool execution</h3>
+          <p>Connects to apps, APIs, documents, calendars, and knowledge bases.</p>
+        </article>
+
+        <article class="capability-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 100 20 10 10 0 000-20z"></path>
+              <path d="M12 6v6l4 2"></path>
+            </svg>
+          </div>
+          <h3>Context memory</h3>
+          <p>Retains project state, preferences, and prior decisions across sessions.</p>
+        </article>
+
+        <article class="capability-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3>Verification &amp; guardrails</h3>
+          <p>Checks outputs, flags uncertainty, and enforces policy boundaries.</p>
+        </article>
+
+        <article class="capability-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7h18"></path>
+              <path d="M7 7v14"></path>
+              <path d="M17 7v14"></path>
+              <path d="M3 12h18"></path>
+            </svg>
+          </div>
+          <h3>Workflow orchestration</h3>
+          <p>Runs multi-step automations with retries, approvals, and audit trails.</p>
+        </article>
+
+        <article class="capability-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 00-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 010 7.75"></path>
+            </svg>
+          </div>
+          <h3>Human approvals</h3>
+          <p>Escalates sensitive actions to the right owner before execution.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="workflow" class="workflow" aria-labelledby="workflow-title">
+    <div class="container">
+      <header class="section-header">
+        <p class="eyebrow">Workflow</p>
+        <h2 id="workflow-title">How Nova operates</h2>
+        <p class="section-subtitle">
+          A transparent loop that keeps you in control while the agent does the heavy lifting.
+        </p>
+      </header>
+
+      <ol class="timeline">
+        <li class="workflow-step">
+          <span class="step-number">1</span>
+          <h3>Discover</h3>
+          <p>Nova connects to your workspace, reads permissions, and maps available tools and data sources.</p>
+        </li>
+        <li class="workflow-step">
+          <span class="step-number">2</span>
+          <h3>Plan</h3>
+          <p>It decomposes your objective into tasks, selects the right integrations, and creates a reviewable plan.</p>
+        </li>
+        <li class="workflow-step">
+          <span class="step-number">3</span>
+          <h3>Execute</h3>
+          <p>The agent runs the workflow step by step, keeping logs, artifacts, and context current.</p>
+        </li>
+        <li class="workflow-step">
+          <span class="step-number">4</span>
+          <h3>Verify</h3>
+          <p>Outputs are checked against constraints, quality rules, and source references before delivery.</p>
+        </li>
+        <li class="workflow-step">
+          <span class="step-number">5</span>
+          <h3>Learn</h3>
+          <p>Approved outcomes improve future runs through memory, templates, and feedback loops.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="demo" class="interactive-demo" aria-labelledby="demo-title">
+    <div class="container">
+      <header class="section-header">
+        <p class="eyebrow">Interactive demo</p>
+        <h2 id="demo-title">See the agent in action</h2>
+        <p class="section-subtitle">
+          Trigger a sample autonomous task and watch Nova plan, execute, and verify.
+        </p>
+      </header>
+
+      <div class="demo-layout">
+        <div class="demo-controls" role="group" aria-label="Demo actions">
+          <button class="demo-btn" type="button" data-demo-action="research" aria-pressed="false">Run research brief</button>
+          <button class="demo-btn" type="button" data-demo-action="inbox" aria-pressed="false">Run inbox triage</button>
+          <button class="demo-btn" type="button" data-demo-action="meeting" aria-pressed="false">Run meeting prep</button>
+          <button class="demo-btn" type="button" data-demo-action="report" aria-pressed="false">Run report draft</button>
+        </div>
+
+        <div class="demo-output" id="demo-output" role="log" aria-live="polite">
+          <div class="demo-log-line">&gt; Select a task to begin</div>
+          <div class="demo-log-line">Nova is ready to execute safely.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="metrics" class="metrics" aria-labelledby="metrics-title">
+    <div class="container">
+      <header class="section-header">
+        <p class="eyebrow">Metrics</p>
+        <h2 id="metrics-title">Built for measurable outcomes</h2>
+      </header>
+
+      <dl class="stats-grid">
+        <div class="stat">
+          <dt>Tasks automated</dt>
+          <dd><span class="stat-value" data-count="1200000" data-suffix="+">0</span></dd>
+        </div>
+        <div class="stat">
+          <dt>Approval rate</dt>
+          <dd><span class="stat-value" data-count="94" data-suffix="%">0</span></dd>
+        </div>
+        <div class="stat">
+          <dt>Connected apps</dt>
+          <dd><span class="stat-value" data-count="18" data-suffix="+">0</span></dd>
+        </div>
+        <div class="stat">
+          <dt>Productivity lift</dt>
+          <dd><span class="stat-value" data-count="3.7" data-decimals="1" data-suffix="x">0</span></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="proof" class="proof" aria-labelledby="proof-title">
+    <div class="container">
+      <header class="section-header">
+        <p class="eyebrow">Proof</p>
+        <h2 id="proof-title">Loved by modern teams</h2>
+      </header>
+
+      <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Customer testimonials" tabindex="0">
+        <button class="carousel-control prev" type="button" data-carousel-prev aria-label="Previous testimonial">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </button>
+
+        <div class="carousel-viewport">
+          <ul class="carousel-track">
+            <li class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Testimonial 1 of 3">
+              <blockquote>
+                “Nova turned our messy research workflow into a repeatable system. It drafts, verifies, and escalates exactly when needed.”
+              </blockquote>
+              <div class="carousel-footer">
+                <div class="avatar" aria-hidden="true">AM</div>
+                <div>
+                  <strong>Amara Mills</strong><br>
+                  <span>Head of Operations, Northwind</span>
+                </div>
+              </div>
+            </li>
+            <li class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Testimonial 2 of 3">
+              <blockquote>
+                “The approval flow is the difference. We get autonomy without losing control, and the audit trail is excellent.”
+              </blockquote>
+              <div class="carousel-footer">
+                <div class="avatar" aria-hidden="true">DK</div>
+                <div>
+                  <strong>David Kim</strong><br>
+                  <span>VP Product, Lumen</span>
+                </div>
+              </div>
+            </li>
+            <li class="carousel-slide" role="group" aria-roledescription="slide" aria-label="Testimonial 3 of 3">
+              <blockquote>
+                “It feels like adding a senior analyst to every team. The output quality and consistency are premium.”
+              </blockquote>
+              <div class="carousel-footer">
+                <div class="avatar" aria-hidden="true">SR</div>
+                <div>
+                  <strong>Sofia Reyes</strong><br>
+                  <span>Chief of Staff, Vertex</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <button class="carousel-control next" type="button" data-carousel-next aria-label="Next testimonial">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </button>
+
+        <div class="carousel-indicators" role="group" aria-label="Choose testimonial">
+          <button class="indicator" type="button" data-carousel-indicator="0" aria-label="Go to testimonial 1" aria-current="true"></button>
+          <button class="indicator" type="button" data-carousel-indicator="1" aria-label="Go to testimonial 2" aria-current="false"></button>
+          <button class="indicator" type="button" data-carousel-indicator="2" aria-label="Go to testimonial 3" aria-current="false"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="pricing" aria-labelledby="pricing-title">
+    <div class="container">
+      <header class="section-header">
+        <p class="eyebrow">Pricing</p>
+        <h2 id="pricing-title">Simple plans, serious capability</h2>
+        <p class="section-subtitle">
+          Start with a free workspace, then scale to advanced orchestration and enterprise controls.
+        </p>
+      </header>
+
+      <div class="pricing-grid">
+        <article class="pricing-card">
+          <h3>Starter</h3>
+          <div class="price">
+            <span class="price-value">$0</span>
+            <span class="price-period">/ month</span>
+          </div>
+          <p>For individuals exploring autonomous workflows.</p>
+          <ul class="feature-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              3 connected apps
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              100 agent runs per month
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              Basic templates
+            </li>
+          </ul>
+          <a class="btn secondary-cta" href="#contact">Get started</a>
+        </article>
+
+        <article class="pricing-card featured">
+          <span class="badge">Most popular</span>
+          <h3>Pro</h3>
+          <div class="price">
+            <span class="price-value">$49</span>
+            <span class="price-period">/ month</span>
+          </div>
+          <p>For teams that need reliable execution and approvals.</p>
+          <ul class="feature-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              Unlimited workflows
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              Advanced verification
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              Team roles &amp; audit logs
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              Priority support
+            </li>
+          </ul>
+          <a class="btn primary-cta" href="#contact">Start Pro trial</a>
+        </article>
+
+        <article class="pricing-card">
+          <h3>Enterprise</h3>
+          <div class="price">
+            <span class="price-value">Custom</span>
+          </div>
+          <p>For organizations with governance and scale requirements.</p>
+          <ul class="feature-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              SSO &amp; SCIM
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              Private deployment options
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              Dedicated success manager
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+              Custom integrations
+            </li>
+          </ul>
+          <a class="btn secondary-cta" href="#contact">Contact sales</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq" aria-labelledby="faq-title">
+    <div class="container">
+      <header class="section-header">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-title">Common questions</h2>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>Is Nova autonomous or just a chatbot?</summary>
+          <p>Nova is an agent. It can plan multi-step work, call tools, verify outputs, and escalate to humans when policy or uncertainty requires approval.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>How does Nova keep actions safe?</summary>
+          <p>Every run uses scoped permissions, verification checks, audit logs, and configurable approval gates before sensitive actions execute.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can Nova connect to our existing tools?</summary>
+          <p>Yes. Nova integrates with common productivity, communication, CRM, support, and knowledge tools through native connectors and APIs.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Does it store our data?</summary>
+          <p>You control data retention and memory scope. Enterprise plans offer private deployment options and stronger governance controls.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What happens if Nova makes a mistake?</summary>
+          <p>Nova logs every step, flags low-confidence outputs, and can request human review. Approved corrections improve future runs.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" aria-labelledby="contact-title">
+    <div class="container contact-layout">
+      <div class="contact-aside">
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-title">Bring Nova into your workflow</h2>
+        <p>
+          Tell us about your team and the outcomes you want to automate. We will help you design a safe,
+          premium autonomous assistant rollout.
+        </p>
+      </div>
+
+      <form class="contact-form" data-contact-form novalidate>
+        <div class="form-row">
+          <div>
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required aria-required="true">
+          </div>
+          <div>
+            <label for="email">Work email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required aria-required="true">
+          </div>
+        </div>
+
+        <div>
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" autocomplete="organization">
+        </div>
+
+        <div>
+          <label for="message">What should Nova automate?</label>
+          <textarea id="message" name="message" required aria-required="true"></textarea>
+        </div>
+
+        <button class="btn primary-cta" type="submit">Request a demo</button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container footer-inner">
+    <p>© 2026 Nova AI. Premium autonomous assistant.</p>
+    <nav aria-label="Footer navigation">
+      <ul class="footer-links">
+        <li><a href="#capabilities">Capabilities</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  if (window.__novaLandingInitialized) return;
+  window.__novaLandingInitialized = true;
+
+  var root = document.documentElement;
+  var themeToggle = document.querySelector('[data-theme-toggle]');
+
+  function setTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    if (themeToggle) {
+      themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
+      var label = themeToggle.querySelector('.theme-toggle-label');
+      if (label) label.textContent = theme === 'dark' ? 'Dark' : 'Light';
+    }
+  }
+
+  var saved = localStorage.getItem('nova-theme');
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  setTheme(saved || (prefersDark ? 'dark' : 'light'));
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      setTheme(next);
+      localStorage.setItem('nova-theme', next);
+    });
+  }
+
+  var navToggle = document.querySelector('.nav-toggle');
+  var primaryNav = document.querySelector('.primary-nav');
+
+  if (navToggle && primaryNav) {
+    navToggle.addEventListener('click', function () {
+      var open = primaryNav.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+  }
+
+  var terminalForm = document.querySelector('[data-terminal-form]');
+  var terminalOutput = document.getElementById('terminal-output');
+
+  if (terminalForm && terminalOutput) {
+    var terminalInput = terminalForm.querySelector('input');
+
+    terminalForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var prompt = terminalInput.value.trim();
+      if (!prompt) return;
+
+      var line = document.createElement('p');
+      line.className = 'terminal-line prompt';
+      line.textContent = '> ' + prompt;
+      terminalOutput.appendChild(line);
+      terminalInput.value = '';
+      terminalOutput.scrollTop = terminalOutput.scrollHeight;
+
+      var responses = {
+        'summarize my inbox': [
+          'Scanning inbox...',
+          'Grouped 18 threads by priority',
+          'Drafted 3 replies for approval'
+        ],
+        'prepare meeting': [
+          'Loading calendar and notes...',
+          'Generated agenda and action items',
+          'Synced summary to workspace'
+        ],
+        'research competitors': [
+          'Querying 4 sources...',
+          'Extracting feature matrix',
+          'Compiled concise brief'
+        ],
+        'default': [
+          'Parsing request...',
+          'Planning steps...',
+          'Executing safely...',
+          'Ready for human review'
+        ]
+      };
+
+      var lower = prompt.toLowerCase();
+      var key = Object.keys(responses).find(function (item) {
+        return item !== 'default' && lower.includes(item);
+      }) || 'default';
+
+      responses[key].forEach(function (text, index) {
+        setTimeout(function () {
+          var response = document.createElement('p');
+          response.className = 'terminal-line response';
+          response.textContent = text;
+          terminalOutput.appendChild(response);
+          terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }, 600 + index * 700);
+      });
+    });
+  }
+
+  var demoButtons = document.querySelectorAll('[data-demo-action]');
+  var demoOutput = document.getElementById('demo-output');
+
+  if (demoButtons.length && demoOutput) {
+    var logs = {
+      research: [
+        '> run task: research_brief',
+        '✓ collected 6 sources',
+        '✓ normalized findings',
+        '✓ generated executive summary',
+        '✓ verification passed'
+      ],
+      inbox: [
+        '> run task: inbox_triage',
+        '✓ classified 42 messages',
+        '✓ drafted 5 replies',
+        '✓ scheduled follow-ups',
+        '✓ waiting for approval'
+      ],
+      meeting: [
+        '> run task: meeting_prep',
+        '✓ loaded calendar context',
+        '✓ summarized prior notes',
+        '✓ created agenda',
+        '✓ exported to workspace'
+      ],
+      report: [
+        '> run task: report_draft',
+        '✓ pulled metrics from 3 apps',
+        '✓ detected anomalies',
+        '✓ drafted narrative',
+        '✓ ready for review'
+      ]
+    };
+
+    demoButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        demoButtons.forEach(function (other) {
+          other.setAttribute('aria-pressed', 'false');
+        });
+        btn.setAttribute('aria-pressed', 'true');
+
+        var action = btn.dataset.demoAction;
+        demoOutput.textContent = '';
+
+        (logs[action] || logs.research).forEach(function (text, index) {
+          setTimeout(function () {
+            var div = document.createElement('div');
+            div.className = 'demo-log-line';
+            div.textContent = text;
+            demoOutput.appendChild(div);
+          }, index * 500);
+        });
+      });
+    });
+  }
+
+  var statEls = document.querySelectorAll('.stat-value[data-count]');
+
+  function animateStat(el) {
+    var target = Number(el.dataset.count || 0);
+    var decimals = Number(el.dataset.decimals || (target < 10 && target % 1 !== 0 ? 1 : 0));
+    var suffix = el.dataset.suffix || '';
+    var prefix = el.dataset.prefix || '';
+    var duration = 1600;
+    var start = performance.now();
+
+    function format(value) {
+      if (target >= 1000000) return (value / 1000000).toFixed(1) + 'M';
+      if (target >= 1000) return Math.round(value).toLocaleString();
+      if (decimals > 0) return value.toFixed(decimals);
+      return Math.round(value).toString();
+    }
+
+    function tick(now) {
+      var progress = Math.min((now - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = prefix + format(target * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  if ('IntersectionObserver' in window && statEls.length) {
+    var statObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateStat(entry.target);
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    statEls.forEach(function (el) {
+      statObserver.observe(el);
+    });
+  } else {
+    statEls.forEach(animateStat);
+  }
+
+  var carousel = document.querySelector('.carousel');
+  var track = document.querySelector('.carousel-track');
+
+  if (carousel && track) {
+    var slides = Array.prototype.slice.call(track.children);
+    var prev = carousel.querySelector('[data-carousel-prev]');
+    var next = carousel.querySelector('[data-carousel-next]');
+    var indicators = Array.prototype.slice.call(carousel.querySelectorAll('[data-carousel-indicator]'));
+    var index = 0;
+
+    function updateCarousel() {
+      track.style.transform = 'translateX(-' + (index * 100) + '%)';
+      slides.forEach(function (slide, i) {
+        slide.setAttribute('aria-hidden', String(i !== index));
+      });
+      indicators.forEach(function (btn, i) {
+        btn.setAttribute('aria-current', String(i === index));
+      });
+    }
+
+    function go(i) {
+      index = (i + slides.length) % slides.length;
+      updateCarousel();
+    }
+
+    if (prev) prev.addEventListener('click', function () {
+      go(index - 1);
+    });
+
+    if (next) next.addEventListener('click', function () {
+      go(index + 1);
+    });
+
+    indicators.forEach(function (btn, i) {
+      btn.addEventListener('click', function () {
+        go(i);
+      });
+    });
+
+    carousel.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowLeft') {
+        go(index - 1);
+        event.preventDefault();
+      }
+      if (event.key === 'ArrowRight') {
+        go(index + 1);
+        event.preventDefault();
+      }
+    });
+
+    updateCarousel();
+  }
+
+  var contactForm = document.querySelector('[data-contact-form]');
+  var formStatus = document.getElementById('form-status');
+
+  if (contactForm && formStatus) {
+    contactForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      if (!contactForm.checkValidity()) {
+        formStatus.textContent = 'Please complete all required fields with valid information.';
+        contactForm.reportValidity();
+        return;
+      }
+
+      formStatus.textContent = 'Thanks! Your request has been queued for the Nova team.';
+      contactForm.reset();
+    });
+  }
+})();
+</script>
+</body>
+</html>

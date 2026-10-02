@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jake — AI Agent for Work, Automation, and Growth</title>
+  <meta name="description" content="Jake is a responsive AI agent that automates tasks, answers questions, drafts content, analyzes data, and helps teams move faster with intelligent workflows.">
+  <meta property="og:title" content="Jake — AI Agent for Work, Automation, and Growth">
+  <meta property="og:description" content="Meet Jake: an AI agent that automates tasks, answers questions, drafts content, analyzes data, and helps teams move faster.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/jake.html">
+  <meta property="og:image" content="jake-og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="jake.css">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: #4f46e5;
+      --accent: #06b6d4;
+      --border: #cbd5e1;
+      --shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+      --radius: 18px;
+      --primary-soft: rgba(79, 70, 229, 0.12);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0b1020;
+      --surface: #111827;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --primary: #818cf8;
+      --accent: #22d3ee;
+      --border: #334155;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+      --primary-soft: rgba(129, 140, 248, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 0;
+      background: var(--primary);
+      color: #fff;
+      padding: 0.75rem 1rem;
+      border-radius: 0 0 8px 8px;
+      z-index: 1000;
+    }
+
+    .skip-link:focus {
+      left: 1rem;
+      top: 1rem;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 2rem));
+      margin-inline: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.35rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-dot {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: 0 0 0 4px var(--primary-soft);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: var(--primary-soft);
+    }
+
+    .theme-toggle {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.45rem 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    main {
+      display: block;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(120deg, #4f46e5, #06b6d4, #7c3aed, #f472b6, #4f46e5);
+      background-size: 300% 300%;
+      animation: gradientShift 14s ease infinite;
+      color: #fff;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.18), transparent 35%),
+        radial-gradient(circle at bottom left, rgba(0, 0, 0, 0.18), transparent 40%);
+      pointer-events: none;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      line-height: 1.05;
+      margin: 0 0 1rem;
+    }
+
+    h2 {
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      margin: 0 0 0.75rem;
+    }
+
+    h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.15rem;
+    }
+
+    .subheadline {
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0 0 1.75rem;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-radius: 999px;
+      padding: 0.95rem 1.4rem;
+      font-weight: 800;
+      text-decoration: none;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: #111827;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    .btn:hover {
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+    }
+
+    .ai-card {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 24px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      animation: float 6s ease-in-out infinite;
+      transform-style: preserve-3d;
+    }
+
+    .ai-card h2 {
+      margin-top: 0;
+      color: #fff;
+    }
+
+    .ai-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .ai-list li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 3rem;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 26px 50px rgba(15, 23, 42, 0.16);
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      background: var(--primary-soft);
+      margin-bottom: 1rem;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .step {
+      position: relative;
+      padding: 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .step span {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      display: block;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .quote {
+      font-size: 1.05rem;
+      margin: 0;
+    }
+
+    .quote-footer {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .price {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price.featured {
+      border: 2px solid var(--primary);
+    }
+
+    .price .tag {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--primary);
+      color: #fff;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    .price-value {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin: 0.75rem 0;
+    }
+
+    .price ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 1.5rem;
+      color: var(--muted);
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .price ul li::before {
+      content: "✓";
+      color: var(--primary);
+      font-weight: 900;
+      margin-right: 0.5rem;
+    }
+
+    .demo-contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .demo-box,
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+    }
+
+    .demo-output {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      color: var(--text);
+      min-height: 72px;
+    }
+
+    form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    label {
+      font-weight: 700;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      background: var(--bg);
+      color: var(--text);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-status {
+      min-height: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .faq details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 800;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq summary::after {
+      content: "+";
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    .faq details[open] summary::after {
+      content: "−";
+    }
+
+    .faq p {
+      color: var(--muted);
+      margin: 0.75rem 0 0;
+    }
+
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 3rem 0;
+      color: var(--muted);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .footer-grid h3 {
+      color: var(--text);
+      margin: 0 0 0.75rem;
+    }
+
+    .footer-grid a {
+      display: block;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-grid a:hover {
+      color: var(--primary);
+    }
+
+    .copyright {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      font-size: 1.25rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+      z-index: 60;
+      box-shadow: var(--shadow);
+    }
+
+    .back-to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    [data-scroll-reveal] {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    [data-scroll-reveal].is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    [data-tilt-card] {
+      will-change: transform;
+    }
+
+    [data-magnetic-button] {
+      will-change: transform;
+    }
+
+    @keyframes gradientShift {
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-14px);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero .container,
+      .demo-contact,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3,
+      .workflow,
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .grid-3,
+      .workflow,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 3.5rem 0;
+      }
+
+      .nav {
+        justify-content: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      [data-scroll-reveal] {
+        opacity: 1;
+        transform: none;
+      }
+
+      .ai-card {
+        animation: none;
+      }
+    }
+  </style>
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("jake-theme");
+        if (saved) {
+          document.documentElement.setAttribute("data-theme", saved);
+        } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (error) {}
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header role="banner">
+    <div class="container nav">
+      <a class="logo" href="#hero" aria-label="Jake home">
+        <span class="logo-dot" aria-hidden="true"></span>
+        Jake
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <div class="nav-links">
+          <a href="#capabilities">Capabilities</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to dark theme">Dark</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero-copy" data-scroll-reveal>
+          <span class="badge">AI agent for modern teams</span>
+          <h1 id="hero-title">Meet Jake, your always-on AI teammate.</h1>
+          <p class="subheadline">Jake automates repetitive work, drafts content, answers questions, analyzes data, and helps your team move faster with clear, reliable, human-friendly assistance.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#contact" data-magnetic-button>Start with Jake</a>
+            <a class="btn btn-secondary" href="#capabilities" data-magnetic-button>Explore capabilities</a>
+          </div>
+        </div>
+
+        <aside class="ai-card" aria-label="Jake AI agent overview" data-tilt-card>
+          <h2>Jake is ready to help</h2>
+          <ul class="ai-list">
+            <li><span aria-hidden="true">⚡</span> Automate emails, reports, and follow-ups.</li>
+            <li><span aria-hidden="true">🧠</span> Summarize documents and extract insights.</li>
+            <li><span aria-hidden="true">📊</span> Build dashboards and analyze performance.</li>
+            <li><span aria-hidden="true">💬</span> Answer customer and internal questions.</li>
+            <li><span aria-hidden="true">🔐</span> Respect privacy, permissions, and audit trails.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="capabilities" aria-labelledby="capabilities-title" data-scroll-reveal>
+      <div class="container">
+        <div class="section-head">
+          <h2 id="capabilities-title">Capabilities</h2>
+          <p>Jake can operate as a research assistant, operations copilot, support agent, content writer, and analytics helper.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card" data-tilt-card>
+            <div class="icon" aria-hidden="true">✍️</div>
+            <h3>Draft and edit</h3>
+            <p>Create emails, proposals, landing pages, social posts, meeting notes, and internal documentation in your brand voice.</p>
+          </article>
+
+          <article class="card" data-tilt-card>
+            <div class="icon" aria-hidden="true">📈</div>
+            <h3>Analyze data</h3>
+            <p>Turn spreadsheets, metrics, and reports into clear summaries, trends, recommendations, and next steps.</p>
+          </article>
+
+          <article class="card" data-tilt-card>
+            <div class="icon" aria-hidden="true">🤝</div>
+            <h3>Support users</h3>
+            <p>Answer common questions, route escalations, and maintain context across conversations with your knowledge base.</p>
+          </article>
+
+          <article class="card" data-tilt-card>
+            <div class="icon" aria-hidden="true">🧩</div>
+            <h3>Connect workflows</h3>
+            <p>Work with CRM, email, docs, chat, and automation tools to trigger actions and keep systems synchronized.</p>
+          </article>
+
+          <article class="card" data-tilt-card>
+            <div class="icon" aria-hidden="true">🔍</div>
+            <h3>Research faster</h3>
+            <p>Compare options, gather sources, identify risks, and prepare concise decision briefs for teams and leaders.</p>
+          </article>
+
+          <article class="card" data-tilt-card>
+            <div class="icon" aria-hidden="true">🛡️</div>
+            <h3>Stay controllable</h3>
+            <p>Use guardrails, approval steps, logging, and human review so Jake supports your process without surprises.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" aria-labelledby="workflow-title" data-scroll-reveal>
+      <div class="container">
+        <div class="section-head">
+          <h2 id="workflow-title">How Jake works</h2>
+          <p>A simple workflow that connects your goals, context, tools, and review process.</p>
+        </div>
+
+        <div class="workflow">
+          <div class="step" data-tilt-card>
+            <span>1</span>
+            <h3>Connect context</h3>
+            <p>Add your knowledge, policies, examples, and preferred tone so Jake understands your environment.</p>
+          </div>
+
+          <div class="step" data-tilt-card>
+            <span>2</span>
+            <h3>Assign tasks</h3>
+            <p>Request research, drafts, summaries, analysis, or support actions through chat, email, or your tools.</p>
+          </div>
+
+          <div class="step" data-tilt-card>
+            <span>3</span>
+            <h3>Review output</h3>
+            <p>Jake presents clear results with sources, assumptions, and next steps for fast human approval.</p>
+          </div>
+
+          <div class="step" data-tilt-card>
+            <span>4</span>
+            <h3>Improve continuously</h3>
+            <p>Feedback updates prompts, workflows, and knowledge so Jake becomes more accurate over time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stats" aria-labelledby="stats-title" data-scroll-reveal>
+      <div class="container">
+        <div class="section-head">
+          <h2 id="stats-title">Built for scale</h2>
+          <p>Jake helps teams reduce manual work, improve response speed, and make better decisions with AI.</p>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-value" data-counter data-target="120000" data-suffix="+">120,000+</span>
+            <span class="stat-label">Tasks automated</span>
+          </div>
+
+          <div class="stat">
+            <span class="stat-value" data-counter data-target="98" data-suffix="%">98%</span>
+            <span class="stat-label">Response accuracy</span>
+          </div>
+
+          <div class="stat">
+            <span class="stat-value" data-counter data-target="45" data-suffix="s">45s</span>
+            <span class="stat-label">Average draft time</span>
+          </div>
+
+          <div class="stat">
+            <span class="stat-value" data-counter data-target="24" data-suffix="/7">24/7</span>
+            <span class="stat-label">Always available</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" aria-labelledby="testimonials-title" data-scroll-reveal>
+      <div class="container">
+        <div class="section-head">
+          <h2 id="testimonials-title">What people say</h2>
+          <p>Teams use Jake to save time, improve clarity, and keep work moving.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card" data-tilt-card>
+            <blockquote class="quote">Jake turned messy meeting notes into clear action items in seconds. It feels like having a junior chief of staff.</blockquote>
+            <p class="quote-footer">Maya Chen — Operations Lead</p>
+          </article>
+
+          <article class="card" data-tilt-card>
+            <blockquote class="quote">Our support team uses Jake to summarize customer history and draft replies. It reduced handle time without losing quality.</blockquote>
+            <p class="quote-footer">Daniel Ortiz — Customer Success Manager</p>
+          </article>
+
+          <article class="card" data-tilt-card>
+            <blockquote class="quote">I asked Jake to analyze campaign performance and it gave me a concise report with recommendations I could actually use.</blockquote>
+            <p class="quote-footer">Aisha Patel — Growth Marketer</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" aria-labelledby="pricing-title" data-scroll-reveal>
+      <div class="container">
+        <div class="section-head">
+          <h2 id="pricing-title">Packages</h2>
+          <p>Choose a plan that fits your team size, automation needs, and level of customization.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card price" data-tilt-card>
+            <h3>Starter</h3>
+            <p class="price-value">$29/mo</p>
+            <ul>
+              <li>Personal AI workspace</li>
+              <li>Basic drafting and summaries</li>
+              <li>500 monthly tasks</li>
+              <li>Email support</li>
+            </ul>
+            <a class="btn btn-primary" href="#contact" data-magnetic-button>Choose Starter</a>
+          </article>
+
+          <article class="card price featured" data-tilt-card>
+            <span class="tag">Most popular</span>
+            <h3>Team</h3>
+            <p class="price-value">$99/mo</p>
+            <ul>
+              <li>Shared workspace and roles</li>
+              <li>Workflow automation</li>
+              <li>5,000 monthly tasks</li>
+              <li>Knowledge base connections</li>
+              <li>Priority support</li>
+            </ul>
+            <a class="btn btn-primary" href="#contact" data-magnetic-button>Choose Team</a>
+          </article>
+
+          <article class="card price" data-tilt-card>
+            <h3>Enterprise</h3>
+            <p class="price-value">Custom</p>
+            <ul>
+              <li>Advanced permissions and SSO</li>
+              <li>Custom integrations</li>
+              <li>Unlimited task volume</li>
+              <li>Security review and SLA</li>
+              <li>Dedicated onboarding</li>
+            </ul>
+            <a class="btn btn-primary" href="#contact" data-magnetic-button>Talk to us</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-title" data-scroll-reveal>
+      <div class="container">
+        <div class="section-head">
+          <h2 id="contact-title">Try Jake</h2>
+          <p>See a quick demo and send a message to learn how Jake can support your team.</p>
+        </div>
+
+        <div class="demo-contact">
+          <div class="demo-box" data-tilt-card>
+            <h3>Interactive demo</h3>
+            <p>Click the button to see how Jake can respond to common requests.</p>
+            <button class="btn btn-primary" id="demo-run" type="button" data-magnetic-button>Run demo</button>
+            <div class="demo-output" id="demo-output" role="status" aria-live="polite">
+              Jake is ready. Click “Run demo” to see sample responses.
+            </div>
+          </div>
+
+          <div class="contact-box">
+            <h3>Contact Jake</h3>
+            <form id="contact-form" novalidate>
+              <div>
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" autocomplete="name" required aria-required="true">
+              </div>
+
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required aria-required="true" aria-describedby="email-help">
+                <small id="email-help">We will only use your email to reply to your request.</small>
+              </div>
+
+              <div>
+                <label for="team-size">Team size</label>
+                <select id="team-size" name="team-size" required aria-required="true">
+                  <option value="">Select an option</option>
+                  <option>Just me</option>
+                  <option>2–10</option>
+                  <option>11–50</option>
+                  <option>51+</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="message">How can Jake help?</label>
+                <textarea id="message" name="message" required aria-required="true"></textarea>
+              </div>
+
+              <button class="btn btn-primary" type="submit" data-magnetic-button>Send request</button>
+              <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq" aria-labelledby="faq-title" data-scroll-reveal>
+      <div class="container">
+        <div class="section-head">
+          <h2 id="faq-title">Frequently asked questions</h2>
+          <p>Learn how Jake works, what it can do, and how teams use it safely.</p>
+        </div>
+
+        <details>
+          <summary>What is Jake?</summary>
+          <p>Jake is an AI agent designed to help with everyday work tasks such as drafting, summarizing, analyzing, researching, and automating workflows.</p>
+        </details>
+
+        <details>
+          <summary>Can Jake connect to my tools?</summary>
+          <p>Yes. Jake can be configured to work with common tools like email, documents, chat platforms, spreadsheets, CRM systems, and automation workflows.</p>
+        </details>
+
+        <details>
+          <summary>Is Jake suitable for teams?</summary>
+          <p>Jake supports shared workspaces, role-based access, approval flows, and context management so teams can collaborate safely.</p>
+        </details>
+
+        <details>
+          <summary>How does Jake handle privacy?</summary>
+          <p>Jake can be configured with permission controls, audit logging, data retention settings, and human review steps to support privacy and governance.</p>
+        </details>
+
+        <details>
+          <summary>Can I try Jake before committing?</summary>
+          <p>Yes. Use the interactive demo on this page or contact the team to request a guided pilot for your workflow.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>Jake</h3>
+          <p>An AI agent that helps teams work faster with clear drafts, useful analysis, and reliable automation.</p>
+        </div>
+
+        <div>
+          <h3>Product</h3>
+          <a href="#capabilities">Capabilities</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#pricing">Pricing</a>
+        </div>
+
+        <div>
+          <h3>Resources</h3>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div>
+          <h3>Company</h3>
+          <a href="#hero">Home</a>
+          <a href="#main">Overview</a>
+          <a href="#contact">Get started</a>
+        </div>
+      </div>
+
+      <p class="copyright">© 2026 Jake AI Agent. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top">↑</button>
+
+  <script src="jake.js" defer></script>
+  <script>
+    (function () {
+      if (window.jakeReady) return;
+      window.jakeReady = true;
+
+      var root = document.documentElement;
+      var themeButton = document.querySelector("[data-theme-toggle]");
+      var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function updateThemeButton() {
+        if (!themeButton) return;
+        var isDark = root.getAttribute("data-theme") === "dark";
+        themeButton.setAttribute("aria-pressed", String(isDark));
+        themeButton.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+        themeButton.textContent = isDark ? "Light" : "Dark";
+      }
+
+      updateThemeButton();
+
+      if (themeButton) {
+        themeButton.addEventListener("click", function () {
+          root.setAttribute("data-theme", root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+          try {
+            localStorage.setItem("jake-theme", root.getAttribute("data-theme"));
+          } catch (error) {}
+          updateThemeButton();
+        });
+      }
+
+      var revealElements = document.querySelectorAll("[data-scroll-reveal]");
+      if (reducedMotion || !("IntersectionObserver" in window)) {
+        revealElements.forEach(function (element) {
+          element.classList.add("is-visible");
+        });
+      } else {
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach(function (element) {
+          revealObserver.observe(element);
+        });
+      }
+
+      function animateCounter(element) {
+        var target = Number(element.getAttribute("data-target") || 0);
+        var suffix = element.getAttribute("data-suffix") || "";
+
+        if (reducedMotion) {
+          element.textContent = target.toLocaleString() + suffix;
+          return;
+        }
+
+        var duration = 1600;
+        var start = performance.now();
+
+        function step(now) {
+          var progress = Math.min((now - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          element.textContent = Math.round(target * eased).toLocaleString() + suffix;
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          }
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      var counters = document.querySelectorAll("[data-counter]");
+      if (reducedMotion || !("IntersectionObserver" in window)) {
+        counters.forEach(animateCounter);
+      } else {
+        var counterObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              animateCounter(entry.target);
+              counterObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.4 });
+
+        counters.forEach(function (element) {
+          counterObserver.observe(element);
+        });
+      }
+
+      var backToTop = document.getElementById("back-to-top");
+
+      function updateBackToTop() {
+        if (!backToTop) return;
+        backToTop.classList.toggle("is-visible", window.scrollY > 600);
+      }
+
+      window.addEventListener("scroll", updateBackToTop, { passive: true });
+      updateBackToTop();
+
+      if (backToTop) {
+        backToTop.addEventListener("click", function () {
+          window.scrollTo({
+            top: 0,
+            behavior: reducedMotion ? "auto" : "smooth"
+          });
+        });
+      }
+
+      if (!reducedMotion) {
+        document.querySelectorAll("[data-tilt-card]").forEach(function (card) {
+          card.addEventListener("mousemove", function (event) {
+            var rect = card.getBoundingClientRect();
+            var x = (event.clientX - rect.left) / rect.width - 0.5;
+            var y = (event.clientY - rect.top) / rect.height - 0.5;
+            card.style.transform =
+              "perspective(900px) rotateX(" + (-y * 6).toFixed(2) + "deg) rotateY(" + (x * 6).toFixed(2) + "deg) translateY(-4px)";
+          });
+
+          card.addEventListener("mouseleave", function () {
+            card.style.transform = "";
+          });
+        });
+
+        document.querySelectorAll("[data-magnetic-button]").forEach(function (button) {
+          button.addEventListener("mousemove", function (event) {
+            var rect = button.getBoundingClientRect();
+            var x = (event.clientX - rect.left - rect.width / 2) * 0.15;
+            var y = (event.clientY - rect.top - rect.height / 2) * 0.15;
+            button.style.transform = "translate(" + x + "px, " + y + "px)";
+          });
+
+          button.addEventListener("mouseleave", function () {
+            button.style.transform = "";
+          });
+        });
+      }
+
+      var demoButton = document.getElementById("demo-run");
+      var demoOutput = document.getElementById("demo-output");
+      var demoResponses = [
+        "Drafted a customer follow-up email with a friendly tone and clear next steps.",
+        "Summarized the quarterly report into 5 key insights and 3 recommended actions.",
+        "Created a project checklist from meeting notes and assigned suggested owners.",
+        "Analyzed support tickets and identified the top recurring issue.",
+        "Prepared a product launch brief with goals, audience, risks, and timeline."
+      ];
+      var demoIndex = 0;
+
+      if (demoButton && demoOutput) {
+        demoButton.addEventListener("click", function () {
+          demoOutput.textContent = demoResponses[demoIndex];
+          demoIndex = (demoIndex + 1) % demoResponses.length;
+        });
+      }
+
+      var form = document.getElementById("contact-form");
+      var status = document.getElementById("form-status");
+
+      if (form && status) {
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          if (!form.reportValidity()) return;
+
+          var submitButton = form.querySelector('button[type="submit"]');
+          var originalText = submitButton.textContent;
+
+          submitButton.disabled = true;
+          submitButton.textContent = "Sending...";
+          status.textContent = "Thanks! Jake received your request and will reply shortly.";
+          form.reset();
+
+          setTimeout(function () {
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+          }, 1200);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
