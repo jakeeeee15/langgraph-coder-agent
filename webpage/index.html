@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aurelia — Creative Developer & Designer</title>
+  <meta name="description" content="Portfolio of Aurelia Vance — creative developer and digital designer crafting elegant web experiences." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar" id="navbar">
+    <nav class="nav-inner container" aria-label="Main navigation">
+      <a href="#home" class="logo" aria-label="Aurelia home">
+        <span class="logo-mark">A</span>
+        <span class="logo-text">Aurelia<span class="logo-dot">.</span></span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light and dark theme">
+          <span class="toggle-track">
+            <i class="fa-solid fa-moon icon-moon"></i>
+            <i class="fa-solid fa-sun icon-sun"></i>
+            <span class="toggle-thumb"></span>
+          </span>
+        </button>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="home">
+      <!-- Parallax decorative layers -->
+      <div class="hero-bg" data-speed="0.15" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-1" data-speed="0.35" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-2" data-speed="0.55" aria-hidden="true"></div>
+
+      <div class="shape shape-1" data-speed="0.5" aria-hidden="true"></div>
+      <div class="shape shape-2" data-speed="0.8" aria-hidden="true"></div>
+      <div class="shape shape-3" data-speed="0.65" aria-hidden="true"></div>
+      <div class="shape shape-4" data-speed="0.4" aria-hidden="true"></div>
+
+      <div class="hero-content container">
+        <p class="hero-eyebrow" data-reveal>Hello, I'm Aurelia Vance</p>
+        <h1 class="hero-title" data-reveal>
+          Crafting <span class="gradient-text shimmer">Digital Elegance</span><br />
+          Into Timeless Experiences
+        </h1>
+        <p class="hero-tagline" data-reveal>
+          <span id="typed-text"></span><span class="type-cursor">|</span>
+        </p>
+        <div class="hero-cta" data-reveal>
+          <a href="#projects" class="btn btn-primary"><span class="btn-shine"></span>View My Work</a>
+          <a href="#contact" class="btn btn-ghost"><span class="btn-shine"></span>Get In Touch</a>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-indicator" aria-label="Scroll to about section">
+        <span class="mouse"><span class="wheel"></span></span>
+        <span class="scroll-label">Scroll</span>
+      </a>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section about" id="about">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-eyebrow">About Me</span>
+          <h2 class="section-title">The Story <span class="gradient-text">Behind The Craft</span></h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="profile-card" data-reveal>
+            <div class="profile-photo">
+              <div class="photo-placeholder" aria-hidden="true">
+                <i class="fa-solid fa-user-astronaut"></i>
+              </div>
+              <span class="profile-ring" aria-hidden="true"></span>
+            </div>
+            <h3 class="profile-name">Aurelia Vance</h3>
+            <p class="profile-role">Creative Developer &amp; Designer</p>
+            <p class="profile-bio">
+              I blend engineering precision with artistic sensibility to build
+              interfaces that feel effortless, elegant, and alive. Based in
+              Lisbon, working worldwide.
+            </p>
+            <div class="profile-socials">
+              <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="#" aria-label="Dribbble"><i class="fa-brands fa-dribbble"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+          </div>
+
+          <div class="about-body">
+            <p class="about-lead" data-reveal>
+              For over a decade I've partnered with startups, studios, and
+              global brands to transform ambitious ideas into refined digital
+              products — from first sketch to final pixel.
+            </p>
+            <p class="about-text" data-reveal>
+              My philosophy is simple: beauty and performance are not rivals.
+              Every project I take on is an exercise in restraint — removing
+              the noise until only the essential, the delightful, remains.
+            </p>
+
+            <div class="stats" id="stats" data-reveal>
+              <div class="stat">
+                <span class="stat-number" data-count="12" data-suffix="+">0</span>
+                <span class="stat-label">Years Experience</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number" data-count="148" data-suffix="+">0</span>
+                <span class="stat-label">Projects Delivered</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number" data-count="64" data-suffix="">0</span>
+                <span class="stat-label">Happy Clients</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number" data-count="9" data-suffix="">0</span>
+                <span class="stat-label">Design Awards</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section skills" id="skills">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-eyebrow">Expertise</span>
+          <h2 class="section-title">Skills <span class="gradient-text">Sharpened By Practice</span></h2>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skills-bars" data-reveal>
+            <div class="skill">
+              <div class="skill-head">
+                <span class="skill-name">Frontend Engineering</span>
+                <span class="skill-percent">95%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" data-percent="95"></div></div>
+            </div>
+            <div class="skill">
+              <div class="skill-head">
+                <span class="skill-name">UI / UX Design</span>
+                <span class="skill-percent">88%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" data-percent="88"></div></div>
+            </div>
+            <div class="skill">
+              <div class="skill-head">
+                <span class="skill-name">Motion &amp; Interaction</span>
+                <span class="skill-percent">82%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" data-percent="82"></div></div>
+            </div>
+            <div class="skill">
+              <div class="skill-head">
+                <span class="skill-name">Backend &amp; APIs</span>
+                <span class="skill-percent">74%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" data-percent="74"></div></div>
+            </div>
+            <div class="skill">
+              <div class="skill-head">
+                <span class="skill-name">Creative Direction</span>
+                <span class="skill-percent">90%</span>
+              </div>
+              <div class="skill-track"><div class="skill-fill" data-percent="90"></div></div>
+            </div>
+          </div>
+
+          <div class="skills-badges" data-reveal>
+            <h3 class="badges-title">Tools &amp; Technologies</h3>
+            <ul class="badge-list">
+              <li class="badge"><i class="fa-brands fa-html5"></i> HTML5</li>
+              <li class="badge"><i class="fa-brands fa-css3-alt"></i> CSS3</li>
+              <li class="badge"><i class="fa-brands fa-js"></i> JavaScript</li>
+              <li class="badge"><i class="fa-brands fa-react"></i> React</li>
+              <li class="badge"><i class="fa-brands fa-vuejs"></i> Vue</li>
+              <li class="badge"><i class="fa-brands fa-node-js"></i> Node.js</li>
+              <li class="badge"><i class="fa-brands fa-figma"></i> Figma</li>
+              <li class="badge"><i class="fa-brands fa-sass"></i> Sass</li>
+              <li class="badge"><i class="fa-brands fa-git-alt"></i> Git</li>
+              <li class="badge"><i class="fa-solid fa-wind"></i> Tailwind</li>
+              <li class="badge"><i class="fa-solid fa-database"></i> PostgreSQL</li>
+              <li class="badge"><i class="fa-solid fa-cube"></i> Blender</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="section projects" id="projects">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-eyebrow">Selected Work</span>
+          <h2 class="section-title">Projects <span class="gradient-text">With A Pulse</span></h2>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card" data-reveal>
+            <div class="project-media">
+              <div class="img-placeholder ph-1" aria-hidden="true"><i class="fa-solid fa-mountain-sun"></i></div>
+              <div class="project-overlay">
+                <a href="#" class="project-link" aria-label="View Summit project"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-tag">Web App</span>
+              <h3 class="project-title">Summit — Alpine Trip Planner</h3>
+              <p class="project-desc">A route-planning platform with live weather overlays and offline maps for mountain explorers.</p>
+            </div>
+          </article>
+
+          <article class="project-card" data-reveal>
+            <div class="project-media">
+              <div class="img-placeholder ph-2" aria-hidden="true"><i class="fa-solid fa-leaf"></i></div>
+              <div class="project-overlay">
+                <a href="#" class="project-link" aria-label="View Verdant project"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-tag">E-Commerce</span>
+              <h3 class="project-title">Verdant — Botanical Store</h3>
+              <p class="project-desc">A lush storefront for rare plants, with AR previews and a care-reminder subscription engine.</p>
+            </div>
+          </article>
+
+          <article class="project-card" data-reveal>
+            <div class="project-media">
+              <div class="img-placeholder ph-3" aria-hidden="true"><i class="fa-solid fa-wave-square"></i></div>
+              <div class="project-overlay">
+                <a href="#" class="project-link" aria-label="View Pulse project"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-tag">SaaS Dashboard</span>
+              <h3 class="project-title">Pulse — Analytics Suite</h3>
+              <p class="project-desc">Real-time analytics with elegant data visualisation, custom alerts, and team workspaces.</p>
+            </div>
+          </article>
+
+          <article class="project-card" data-reveal>
+            <div class="project-media">
+              <div class="img-placeholder ph-4" aria-hidden="true"><i class="fa-solid fa-palette"></i></div>
+              <div class="project-overlay">
+                <a href="#" class="project-link" aria-label="View Atelier project"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-tag">Brand &amp; Web</span>
+              <h3 class="project-title">Atelier Noir — Gallery Site</h3>
+              <p class="project-desc">An immersive virtual gallery with scroll-driven storytelling for a contemporary art house.</p>
+            </div>
+          </article>
+
+          <article class="project-card" data-reveal>
+            <div class="project-media">
+              <div class="img-placeholder ph-5" aria-hidden="true"><i class="fa-solid fa-mobile-screen"></i></div>
+              <div class="project-overlay">
+                <a href="#" class="project-link" aria-label="View Lumen project"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-tag">Mobile</span>
+              <h3 class="project-title">Lumen — Mindfulness App</h3>
+              <p class="project-desc">A calm-first meditation companion with generative soundscapes and gentle habit streaks.</p>
+            </div>
+          </article>
+
+          <article class="project-card" data-reveal>
+            <div class="project-media">
+              <div class="img-placeholder ph-6" aria-hidden="true"><i class="fa-solid fa-robot"></i></div>
+              <div class="project-overlay">
+                <a href="#" class="project-link" aria-label="View Oracle project"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-tag">AI Tool</span>
+              <h3 class="project-title">Oracle — Writing Copilot</h3>
+              <p class="project-desc">An AI-assisted editor that learns an author's voice and suggests refinements in real time.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="section testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-eyebrow">Kind Words</span>
+          <h2 class="section-title">What Clients <span class="gradient-text">Say</span></h2>
+        </div>
+
+        <div class="carousel" id="testimonial-carousel" data-reveal>
+          <div class="carousel-track" id="carousel-track">
+            <figure class="testimonial active">
+              <blockquote>
+                “Aurelia took our vague idea and returned something far better
+                than we imagined. The site feels like us — only sharper.”
+              </blockquote>
+              <figcaption>
+                <span class="t-avatar" aria-hidden="true">MK</span>
+                <span class="t-meta"><strong>Maya Krishnan</strong><em>Founder, Verdant</em></span>
+              </figcaption>
+            </figure>
+
+            <figure class="testimonial">
+              <blockquote>
+                “Rare combination: a designer who codes, and an engineer with
+                taste. Our conversion rate rose 40% after launch.”
+              </blockquote>
+              <figcaption>
+                <span class="t-avatar" aria-hidden="true">JD</span>
+                <span class="t-meta"><strong>Jonas Dahl</strong><em>CTO, Pulse Analytics</em></span>
+              </figcaption>
+            </figure>
+
+            <figure class="testimonial">
+              <blockquote>
+                “Every detail was considered — the motion, the typography, the
+                silence between elements. Simply world-class work.”
+              </blockquote>
+              <figcaption>
+                <span class="t-avatar" aria-hidden="true">SR</span>
+                <span class="t-meta"><strong>Sofia Reyes</strong><em>Director, Atelier Noir</em></span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="carousel-controls">
+            <button class="carousel-btn" id="carousel-prev" aria-label="Previous testimonial"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="carousel-dots" id="carousel-dots" role="tablist" aria-label="Testimonial slides"></div>
+            <button class="carousel-btn" id="carousel-next" aria-label="Next testimonial"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="section-eyebrow">Get In Touch</span>
+          <h2 class="section-title">Let's Build Something <span class="gradient-text">Beautiful</span></h2>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info" data-reveal>
+            <p class="contact-lead">
+              Have a project in mind, or just want to say hello? My inbox is
+              always open — I usually reply within a day.
+            </p>
+            <ul class="contact-details">
+              <li><i class="fa-solid fa-envelope"></i><span>hello@aurelia.design</span></li>
+              <li><i class="fa-solid fa-location-dot"></i><span>Lisbon, Portugal — Remote worldwide</span></li>
+              <li><i class="fa-solid fa-clock"></i><span>Mon–Fri, 9:00–18:00 WET</span></li>
+            </ul>
+            <div class="contact-socials">
+              <a href="#" class="social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+              <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="#" class="social-btn" aria-label="Dribbble"><i class="fa-brands fa-dribbble"></i></a>
+              <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+          </div>
+
+          <form class="contact-form" id="contact-form" data-reveal novalidate>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required />
+              </div>
+              <div class="form-field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="What's this about?" />
+            </div>
+            <div class="form-field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full"><span class="btn-shine"></span>Send Message <i class="fa-solid fa-paper-plane"></i></button>
+            <p class="form-success" id="form-success" hidden>
+              <i class="fa-solid fa-circle-check"></i> Thank you! Your message has been sent — I'll be in touch soon.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="#home" class="logo footer-logo">
+        <span class="logo-mark">A</span>
+        <span class="logo-text">Aurelia<span class="logo-dot">.</span></span>
+      </a>
+      <p class="footer-note">© <span id="year"></span> Aurelia Vance. Crafted with care &amp; caffeine.</p>
+      <ul class="footer-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <a href="#home" class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

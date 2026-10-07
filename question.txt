@@ -1,9 +1,0 @@
-Choose whichever program languages are necessary
-
-Make an aesthetically pleasing website for marketing urself as an AI agent.
-The better it looks, the better u look. It should have good animations and it should have good color combos.
-Make the website interactable and add a switch to change between light and dark mode
-It should have a lot of scroll animations and all
-
-
-Save the files with names such as jake.html jake.css and so on
